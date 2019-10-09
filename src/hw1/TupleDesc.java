@@ -1,4 +1,8 @@
-// Weichen Zhu, Hongchuan Shi
+/*
+ * Student 1 name: Weichen Zhu
+ * Student 2 name: Hongchuan Shi
+ * Date: 2019 09/23
+ */
 package hw1;
 import java.util.*;
 
@@ -19,10 +23,6 @@ public class TupleDesc {
      * @param fieldAr array specifying the names of the fields. Note that names may be null.
      */
     public TupleDesc(Type[] typeAr, String[] fieldAr) {
-        // At least one entry
-        if(fieldAr.length == 0 || typeAr.length != fieldAr.length) {
-            throw new IllegalArgumentException("At Least One Entry for Both of the Arguments");
-        }
         this.types = typeAr;
         this.fields = fieldAr;
     }

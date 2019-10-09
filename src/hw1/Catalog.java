@@ -1,7 +1,9 @@
-// Weichen Zhu, Hongchuan Shi
+/*
+ * Student 1 name: Weichen Zhu
+ * Student 2 name: Hongchuan Shi
+ * Date: 2019 09/23
+ */
 package hw1;
-
-import sun.tools.jconsole.Tab;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -64,10 +66,14 @@ public class Catalog {
     	Table newTable = new Table(file, name, pkeyField);
 
     	// Check name conflict
-        for(Map.Entry<Integer, Table> entry: map.entrySet()) {
+        Set<Map.Entry<Integer, Table>> set = map.entrySet();
+        // Use Iterator to avoid concurrent problems
+        Iterator<Map.Entry<Integer, Table>> itr = set.iterator();
+        while(itr.hasNext()) {
+            Map.Entry<Integer, Table> entry = itr.next();
             Table table = entry.getValue();
             if(table.name.equals(name)) {
-                map.remove(entry.getKey());
+                itr.remove();
             }
         }
         map.put(newTable.id, newTable);

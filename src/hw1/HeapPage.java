@@ -1,4 +1,8 @@
-// Weichen Zhu, Hongchuan Shi
+/*
+ * Student 1 name: Weichen Zhu
+ * Student 2 name: Hongchuan Shi
+ * Date: 2019 09/23
+ */
 package hw1;
 
 import java.io.ByteArrayInputStream;

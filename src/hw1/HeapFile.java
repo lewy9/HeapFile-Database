@@ -1,8 +1,11 @@
-// Weichen Zhu, Hongchuan Shi
+/*
+ * Student 1 name: Weichen Zhu
+ * Student 2 name: Hongchuan Shi
+ * Date: 2019 09/23
+ */
 package hw1;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
@@ -49,7 +52,7 @@ public class HeapFile {
 	 */
 	public HeapPage readPage(int id) {
 		File file = getFile();
-		RandomAccessFile raf = null;
+		RandomAccessFile raf;
 		try {
 			raf = new RandomAccessFile(file, "rw");
 			byte[] data = new byte[PAGE_SIZE];
@@ -57,17 +60,10 @@ public class HeapFile {
 			raf.seek(PAGE_SIZE * id);
 			raf.read(data);
 			int tableId = getId();
+			raf.close();
 			return new HeapPage(id, data, tableId);
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				if (raf != null) {
-					raf.close();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
 
 		return null;
@@ -92,22 +88,15 @@ public class HeapFile {
 		int pageId = p.getId();
 		byte[] data = p.getPageData();
 		File file = getFile();
-		RandomAccessFile raf = null;
+		RandomAccessFile raf;
 		try {
 			raf = new RandomAccessFile(file, "rw");
 			// Set current pointer
 			raf.seek(PAGE_SIZE * pageId);
 			raf.write(data);
+			raf.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				if (raf != null) {
-					raf.close();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 	
@@ -196,6 +185,7 @@ public class HeapFile {
 		try {
 			raf = new RandomAccessFile(getFile(), "rw");
 			num = raf.length() % PAGE_SIZE == 0 ? (int) (raf.length() / PAGE_SIZE) : (int) (raf.length() / PAGE_SIZE + 1);
+			raf.close();
 			return num;
 		} catch (IOException e) {
 			e.printStackTrace();
