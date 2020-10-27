@@ -137,6 +137,20 @@ public class HeapFile {
 
 		return null;
 	}
+
+	public HeapPage getFirstAvailablePage() {
+		// Get the number of pages
+		int num = getNumPages();
+
+		// has available slot
+		for(int i = 0; i < num; i++) {
+			HeapPage hp = readPage(i);
+			if(hp.hasAvailableSlot()) {
+				return hp;
+			}
+		}
+		return null;
+	}
 	
 	/**
 	 * This method will examine the tuple to find out where it is stored, then delete it

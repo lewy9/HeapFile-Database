@@ -102,8 +102,7 @@ public class YourHW3Tests {
 		ArrayList<Field> k = in.getKeys();
 		ArrayList<Node> c = in.getChildren();
 
-		assertTrue(k.get(0).compare(RelationalOperator.EQ, new IntField(6)));
-		assertTrue(k.get(0).compare(RelationalOperator.EQ, new IntField(9)));
+		assertTrue(k.get(0).compare(RelationalOperator.EQ, new IntField(1)));
 
 		//grab left, middle and right children from root
 		Node l = c.get(0);

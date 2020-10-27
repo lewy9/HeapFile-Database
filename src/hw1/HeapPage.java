@@ -13,8 +13,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class HeapPage {
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 
 	private int id;
 	private byte[] header;
@@ -22,7 +27,7 @@ public class HeapPage {
 	private TupleDesc td;
 	private int numSlots;
 	private int tableId;
-
+	private boolean isDirty = false;
 
 
 	public HeapPage(int id, byte[] data, int tableId) throws IOException {
@@ -49,8 +54,33 @@ public class HeapPage {
 		dis.close();
 	}
 
+	public boolean isDirty() {
+		return isDirty;
+	}
+
+	public void setDirty(boolean isDirty) {
+		this.isDirty = isDirty;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		HeapPage heapPage = (HeapPage) o;
+		return id == heapPage.id && tableId == heapPage.tableId;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, tableId);
+	}
+
 	public int getId() {
 		return this.id;
+	}
+
+	public int getTableId() {
+		return this.tableId;
 	}
 
 	/**
